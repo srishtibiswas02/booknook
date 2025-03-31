@@ -162,15 +162,29 @@ const BookReviews = () => {
   ];
 
   useEffect(() => {
+    setBooks(initialBooks);
+  }, [initialBooks]);
+
+  // Define the missing functions
+  const fetchBook = () => {
+    // Implementation for fetching a book
+    console.log("Fetching book details for:", selectedBook);
+    // You would typically make an API call here
+  };
+
+  const fetchUserReviews = () => {
+    // Implementation for fetching user reviews
+    console.log("Fetching reviews for book:", selectedBook);
+    // You would typically make an API call here
+  };
+
+  // Fix the useEffect with the missing dependencies
+  useEffect(() => {
     if (selectedBook) {
       fetchBook();
       fetchUserReviews();
     }
-  }, [selectedBook, fetchBook, fetchUserReviews]);
-
-  useEffect(() => {
-    setBooks(initialBooks);
-  }, [initialBooks]);
+  }, [selectedBook]);
 
   const handleBookSelect = (book) => {
     setSelectedBook(book);
