@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -20,8 +20,8 @@ api.interceptors.request.use((config) => {
 
 // Auth API
 export const authAPI = {
-  login: (credentials) => api.post('/auth/login', credentials),
-  register: (userData) => api.post('/auth/register', userData),
+  login: `${API_URL}/api/users/login`,
+  register: `${API_URL}/api/users/register`,
   logout: () => api.post('/auth/logout'),
   getProfile: () => api.get('/auth/profile'),
   updateProfile: (userData) => api.put('/auth/profile', userData),
@@ -56,6 +56,30 @@ export const ordersAPI = {
 export const paymentAPI = {
   createPaymentIntent: (amount) => api.post('/payment/create-intent', { amount }),
   confirmPayment: (paymentIntentId) => api.post('/payment/confirm', { paymentIntentId }),
+};
+
+// Book endpoints
+export const bookAPI = {
+  books: `${API_URL}/api/books`,
+  bookById: (id) => `${API_URL}/api/books/${id}`,
+};
+
+// Review endpoints
+export const reviewAPI = {
+  reviews: `${API_URL}/api/reviews`,
+  bookReviews: (bookId) => `${API_URL}/api/reviews/${bookId}`,
+};
+
+// Meeting endpoints
+export const meetingAPI = {
+  meetings: `${API_URL}/api/meetings`,
+  meetingById: (id) => `${API_URL}/api/meetings/${id}`,
+};
+
+// Blog endpoints
+export const blogAPI = {
+  blogs: `${API_URL}/api/blogs`,
+  blogById: (id) => `${API_URL}/api/blogs/${id}`,
 };
 
 export default api; 
