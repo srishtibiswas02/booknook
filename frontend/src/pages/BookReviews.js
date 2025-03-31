@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { StarIcon } from '@heroicons/react/24/outline';
-import { StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
+import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
+import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import bm1 from '../assets/bm1.webp';
@@ -162,8 +162,15 @@ const BookReviews = () => {
   ];
 
   useEffect(() => {
+    if (selectedBook) {
+      fetchBook();
+      fetchUserReviews();
+    }
+  }, [selectedBook, fetchBook, fetchUserReviews]);
+
+  useEffect(() => {
     setBooks(initialBooks);
-  }, []);
+  }, [initialBooks]);
 
   const handleBookSelect = (book) => {
     setSelectedBook(book);
@@ -280,7 +287,7 @@ const BookReviews = () => {
 
   const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => (
-      <StarSolidIcon
+      <StarIconSolid
         key={i}
         className={`h-5 w-5 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
       />
@@ -378,7 +385,7 @@ const BookReviews = () => {
                             onClick={() => setNewReview({ ...newReview, rating: star })}
                             className="focus:outline-none"
                           >
-                            <StarSolidIcon
+                            <StarIconSolid
                               className={`h-6 w-6 ${
                                 star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'
                               }`}

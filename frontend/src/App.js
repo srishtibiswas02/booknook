@@ -36,7 +36,7 @@ import Meeting from './pages/Meeting';
 import MeetingDetail from './pages/MeetingDetail';
 
 const App = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
     <Router>

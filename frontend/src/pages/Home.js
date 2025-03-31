@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   BookOpenIcon,
   SpeakerWaveIcon,
@@ -11,6 +12,7 @@ import {
   StarIcon,
   ArrowRightIcon,
   MagnifyingGlassIcon,
+  ShoppingCartIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon, StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
 import heroImage from '../assets/bgimg.jpg';
@@ -166,10 +168,10 @@ const Home = () => {
   const wishlistItems = useSelector((state) => state.wishlist.items);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const scrollContainerRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(null);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('all');
   const [favorites, setFavorites] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const heroTextRef = useRef(null);
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -184,9 +186,8 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [stats, setStats] = useState({
     totalBooks: 0,
-    totalAuthors: 0,
-    happyReaders: 0,
-    customerSatisfaction: 0
+    totalUsers: 0,
+    totalReviews: 0
   });
   const [blogs, setBlogs] = useState([]);
 
@@ -389,7 +390,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="font-[Inter]">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative h-[600px] bg-gradient-to-r from-[#113854] to-[#1a4f7a] overflow-hidden">
         <div className="absolute inset-0" style={{
