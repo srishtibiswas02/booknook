@@ -28,7 +28,8 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const API_URL = process.env.REACT_APP_API_URL || 'https://booknook-zmhm.onrender.com';
+      const response = await fetch(`${API_URL}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
