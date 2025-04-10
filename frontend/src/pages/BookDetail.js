@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import ReviewForm from '../components/ReviewForm';
-import { addToCart } from '../features/cartSlice';
+import { addToCart } from '../store/slices/cartSlice';
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -45,7 +45,50 @@ const BookDetail = () => {
 
   const handleAddToCart = () => {
     if (book) {
-      dispatch(addToCart(book));
+      // Remove any existing notifications first
+      const existingToasts = document.querySelectorAll('.cart-notification-toast');
+      existingToasts.forEach(toast => {
+        document.body.removeChild(toast);
+      });
+
+      // Dispatch with the correct format for the store/slices/cartSlice
+      dispatch(addToCart({ 
+        product: {
+          id: book._id,
+          title: book.title,
+          author: book.author,
+          price: book.price,
+          image: book.image,
+          description: book.description
+        },
+        quantity: 1
+      }));
+      
+      // Show a toast notification
+      const toast = document.createElement('div');
+      toast.className = 'cart-notification-toast fixed bottom-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md transition-opacity duration-500 ease-in-out z-50';
+      toast.innerHTML = `
+        <div class="flex items-center">
+          <div class="py-1"><svg class="h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg></div>
+          <div>
+            <p class="font-bold">Added to cart!</p>
+            <p class="text-sm">${book.title} (1 item)</p>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(toast);
+      
+      // Remove the toast after 3 seconds
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+          if (document.body.contains(toast)) {
+            document.body.removeChild(toast);
+          }
+        }, 500);
+      }, 3000);
     }
   };
 

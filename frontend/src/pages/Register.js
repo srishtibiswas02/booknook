@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
-import { Camera as AtSign, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { Camera as AtSign, Lock, User, Eye, EyeOff, Check, X } from 'lucide-react';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,12 +17,34 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordRequirements, setPasswordRequirements] = useState({
+    hasUpperCase: false,
+    hasLowerCase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+    hasMinLength: false,
+  });
+
+  const checkPasswordRequirements = (password) => {
+    setPasswordRequirements({
+      hasUpperCase: /[A-Z]/.test(password),
+      hasLowerCase: /[a-z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+      hasMinLength: password.length >= 8,
+    });
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    if (name === 'password') {
+      checkPasswordRequirements(value);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -32,6 +54,13 @@ const Register = () => {
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    // Check if all password requirements are met
+    if (!Object.values(passwordRequirements).every(req => req)) {
+      setError('Password does not meet all requirements');
       setLoading(false);
       return;
     }
@@ -66,6 +95,17 @@ const Register = () => {
     }
   };
 
+  const RequirementItem = ({ met, text }) => (
+    <div className="flex items-center space-x-2 text-sm">
+      {met ? (
+        <Check className="h-4 w-4 text-green-500" />
+      ) : (
+        <X className="h-4 w-4 text-red-500" />
+      )}
+      <span className={met ? 'text-green-600' : 'text-gray-500'}>{text}</span>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#EDE3D3] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-[1.01]">
@@ -89,6 +129,7 @@ const Register = () => {
               <p className="font-medium">{error}</p>
             </div>
           )}
+          
           <div className="space-y-4">
             <div className="relative">
               <label htmlFor="name" className="sr-only">Name</label>
@@ -106,6 +147,7 @@ const Register = () => {
                 onChange={handleChange}
               />
             </div>
+
             <div className="relative">
               <label htmlFor="email" className="sr-only">Email address</label>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -123,6 +165,7 @@ const Register = () => {
                 onChange={handleChange}
               />
             </div>
+
             <div className="relative">
               <label htmlFor="password" className="sr-only">Password</label>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -147,6 +190,18 @@ const Register = () => {
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
+
+            <div className="space-y-2 bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-sm font-medium text-gray-700">Password Requirements:</h3>
+              <div className="space-y-1">
+                <RequirementItem met={passwordRequirements.hasUpperCase} text="At least one uppercase letter" />
+                <RequirementItem met={passwordRequirements.hasLowerCase} text="At least one lowercase letter" />
+                <RequirementItem met={passwordRequirements.hasNumber} text="At least one number" />
+                <RequirementItem met={passwordRequirements.hasSpecialChar} text="At least one special character" />
+                <RequirementItem met={passwordRequirements.hasMinLength} text="At least 8 characters long" />
+              </div>
+            </div>
+
             <div className="relative">
               <label htmlFor="confirmPassword" className="sr-only">Confirm Password</label>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

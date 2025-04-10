@@ -1088,6 +1088,14 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
+    
+    // Remove any existing notifications first
+    const existingToasts = document.querySelectorAll('.cart-notification-toast');
+    existingToasts.forEach(toast => {
+      document.body.removeChild(toast);
+    });
+    
+    // Dispatch action to add the product to cart
     dispatch(addToCart({ 
       product: {
         id: product.id,
@@ -1102,7 +1110,7 @@ const ProductDetail = () => {
     
     // Show a toast notification
     const toast = document.createElement('div');
-    toast.className = 'fixed bottom-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md transition-opacity duration-500 ease-in-out';
+    toast.className = 'cart-notification-toast fixed bottom-4 right-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-md transition-opacity duration-500 ease-in-out z-50';
     toast.innerHTML = `
       <div class="flex items-center">
         <div class="py-1"><svg class="h-6 w-6 text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1120,7 +1128,9 @@ const ProductDetail = () => {
     setTimeout(() => {
       toast.style.opacity = '0';
       setTimeout(() => {
-        document.body.removeChild(toast);
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
       }, 500);
     }, 3000);
   };

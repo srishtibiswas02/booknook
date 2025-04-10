@@ -21,7 +21,9 @@ const Checkout = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-8 text-center">Complete Your Order</h1>
+      <h1 className="text-5xl font-bold text-[#B4846C] mb-4 font-serif">
+            Checkout
+          </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4 border-b pb-2">Shipping Information</h2>

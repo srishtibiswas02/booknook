@@ -31,7 +31,21 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    country: String,
+  },
+}, {
+  timestamps: true,
 });
 
 // Hash password before saving
@@ -47,10 +61,10 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// Method to compare password
-userSchema.methods.comparePassword = async function(candidatePassword) {
+// Compare password method
+userSchema.methods.matchPassword = async function(enteredPassword) {
   try {
-    return await bcrypt.compare(candidatePassword, this.password);
+    return await bcrypt.compare(enteredPassword, this.password);
   } catch (error) {
     throw error;
   }

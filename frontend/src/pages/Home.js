@@ -16,6 +16,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon, StarIcon as StarSolidIcon } from '@heroicons/react/24/solid';
 import heroImage from '../assets/bgimg.jpg';
+import bgImage from '../assets/bgimg.png';
 import book1 from '../assets/book1.jpg';
 import book2 from '../assets/book2.jpg';
 import powerless from '../assets/powerless.jpg';
@@ -392,29 +393,34 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative h-[600px] bg-gradient-to-r from-[#113854] to-[#1a4f7a] overflow-hidden">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
+      <section className="relative h-[650px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#113854]/90 to-[#1a4f7a]/90">
+          <img 
+            src={bgImage} 
+            alt="Books background" 
+            className="w-full h-full object-cover mix-blend-overlay opacity-90" 
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#113854]/30 backdrop-blur-sm bg-[#113854]/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
+          <div className="max-w-2xl p-8 rounded-lg border border-white/10 shadow-xl ">
+            <h1 className="text-5xl font-bold text-white mb-6 leading-tight ">
               Discover Your Next <span className="text-[#B4846C]">Literary Adventure</span>
             </h1>
-            <p className="text-xl text-gray-200 mb-8">
+            <p className="text-xl text-white mb-8">
               Explore our curated collection of books that will transport you to different worlds and expand your horizons.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to="/category/fiction"
-                className="bg-[#B4846C] text-white px-8 py-3 rounded-lg hover:bg-[#A3735B] transition-colors font-medium"
+                className="bg-[#B4846C] text-white px-8 py-3 rounded-lg hover:bg-[#A3735B] transition-colors font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-center"
               >
                 Browse Books
               </Link>
               {isAuthenticated && (
                 <Link
                   to="/book-reviews"
-                  className="bg-white text-[#113854] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+                  className="bg-white text-[#113854] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-center"
                 >
                   Write Reviews
                 </Link>
@@ -424,94 +430,46 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Bar */}
-      <div className="bg-[#2D3142] text-white py-6">
+      {/* Categories Section with improved layout */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="font-medium">Fast Delivery</h3>
-              <p className="text-sm text-gray-300">Within 48 hours</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <h3 className="font-medium">Secure Payment</h3>
-              <p className="text-sm text-gray-300">100% secure checkout</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-              </svg>
-              <h3 className="font-medium">Easy Returns</h3>
-              <p className="text-sm text-gray-300">7-day return policy</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-              <h3 className="font-medium">24/7 Support</h3>
-              <p className="text-sm text-gray-300">Always available</p>
-            </div>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#113854] mb-4">Explore Categories</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover books from various categories to match your reading preferences
+            </p>
           </div>
-        </div>
-      </div>
-
-      {/* Testimonials Section */}
-      <div className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            What Our Readers Say
-          </h2>
-          <div className="relative h-64">
-            {testimonials.map((testimonial, idx) => (
-              <div 
-                key={testimonial.id}
-                className={`absolute inset-0 transition-all duration-700 transform ${
-                  idx === currentTestimonial 
-                    ? 'opacity-100 translate-x-0' 
-                    : idx < currentTestimonial 
-                      ? 'opacity-0 -translate-x-full' 
-                      : 'opacity-0 translate-x-full'
-                }`}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {categories.map((category) => (
+              <Link
+                key={category.name}
+                to={category.link}
+                className="group relative h-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
               >
-                <div className="bg-[#EDE3D3] rounded-2xl p-8 shadow-lg flex flex-col items-center text-center">
-                  <img 
-                    src={testimonial.avatar} 
-                    alt={testimonial.name} 
-                    className="w-20 h-20 rounded-full border-4 border-white shadow-md mb-4"
+                <div className="absolute inset-0">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="flex mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <StarIcon 
-                        key={i}
-                        className={`h-5 w-5 ${i < testimonial.rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
-                  <h4 className="font-medium text-[#B4846C]">{testimonial.name}</h4>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${category.bgColor} opacity-80`}></div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-6">
-            {testimonials.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentTestimonial(idx)}
-                className={`h-3 w-3 rounded-full mx-2 transition-all duration-300 ${
-                  idx === currentTestimonial ? 'bg-[#B4846C] w-6' : 'bg-gray-300'
-                }`}
-              ></button>
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  <div className="p-3 bg-white rounded-full w-16 h-16 flex items-center justify-center mb-auto ml-auto shadow-lg transform transition-transform duration-300 group-hover:rotate-12">
+                    <category.icon className="h-8 w-8 text-[#113854]" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
+                    <p className="text-white/80">{category.description}</p>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-      </div>
-
+      </section>
+      
+      
       {/* Newsletter Section with Animation */}
       <div className="py-20 bg-gradient-to-b from-white to-[#EDE3D3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -616,28 +574,189 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Reading Stats Section */}
-      <div className="py-16 bg-white">
+      {/* Blog Preview Section */}
+      <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#113854] mb-12 text-center">
-            Books That Inspire
-          </h2>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="mb-6 md:mb-0">
+              <span className="block text-[#B4846C] font-semibold text-sm uppercase tracking-wider mb-2">Latest Updates</span>
+              <h2 className="text-4xl font-bold text-[#113854]">
+                From Our Blog
+              </h2>
+              <div className="w-24 h-1 bg-[#B4846C] mt-4"></div>
+            </div>
+            <Link 
+              to="/blog" 
+              className="inline-flex items-center px-6 py-3 rounded-lg bg-[#f5f0e8] text-[#113854] font-medium hover:bg-[#B4846C] hover:text-white transition-all duration-300 shadow-sm"
+            >
+              View All Posts
+              <ArrowRightIcon className="h-5 w-5 ml-2" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="relative">
+                <img 
+                  src={book1} 
+                  alt="Blog Post" 
+                  className="w-full h-56 object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute top-4 left-4 bg-[#B4846C] text-white text-xs px-3 py-1 rounded-full">
+                  Author Spotlight
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3 text-[#113854] hover:text-[#B4846C] transition-colors duration-200">
+                  An Afternoon with Arundhati Roy
+                </h3>
+                <p className="text-gray-600 text-sm mb-6 line-clamp-3">
+                  Our exclusive interview with the Booker Prize winner about her creative process and upcoming works.
+                </p>
+                <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <span className="text-xs text-gray-500 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    March 15, 2025
+                  </span>
+                  <Link 
+                    to="/blog/1" 
+                    className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200 flex items-center"
+                  >
+                    Read More
+                    <ArrowRightIcon className="h-4 w-4 ml-1" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="relative">
+                <img 
+                  src={book2} 
+                  alt="Blog Post" 
+                  className="w-full h-56 object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute top-4 left-4 bg-[#2D3142] text-white text-xs px-3 py-1 rounded-full">
+                  Reading Tips
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3 text-[#113854] hover:text-[#B4846C] transition-colors duration-200">
+                  10 Ways to Create the Perfect Reading Nook
+                </h3>
+                <p className="text-gray-600 text-sm mb-6 line-clamp-3">
+                  Transform any corner of your home into a cozy sanctuary for your reading sessions.
+                </p>
+                <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <span className="text-xs text-gray-500 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    March 10, 2025
+                  </span>
+                  <Link 
+                    to="/blog/2" 
+                    className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200 flex items-center"
+                  >
+                    Read More
+                    <ArrowRightIcon className="h-4 w-4 ml-1" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+              <div className="relative">
+                <img 
+                  src={bm1} 
+                  alt="Blog Post" 
+                  className="w-full h-56 object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute top-4 left-4 bg-emerald-600 text-white text-xs px-3 py-1 rounded-full">
+                  Book Reviews
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-3 text-[#113854] hover:text-[#B4846C] transition-colors duration-200">
+                  March's Most Anticipated New Releases
+                </h3>
+                <p className="text-gray-600 text-sm mb-6 line-clamp-3">
+                  Our editors have curated a list of the most exciting books hitting shelves this month.
+                </p>
+                <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                  <span className="text-xs text-gray-500 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    March 5, 2025
+                  </span>
+                  <Link 
+                    to="/blog/3" 
+                    className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200 flex items-center"
+                  >
+                    Read More
+                    <ArrowRightIcon className="h-4 w-4 ml-1" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Reading Stats Section - Improved */}
+      <div className="py-20 bg-gradient-to-b from-[#f5f0e8] to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="block text-[#B4846C] font-semibold text-sm uppercase tracking-wider mb-2">Our Impact</span>
+            <h2 className="text-4xl font-bold text-[#113854] mb-4">The BookNook Community</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Join thousands of readers who have found their next favorite book with us
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="bg-[#EDE3D3] rounded-lg p-6 text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="text-4xl font-bold text-[#113854] mb-2">2000+</div>
-              <p className="text-gray-700">Books in Collection</p>
+            <div className="bg-white rounded-xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-100 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-2 h-full bg-amber-500"></div>
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto">
+                  <BookOpenIcon className="h-8 w-8 text-amber-500" />
+                </div>
+              </div>
+              <div className="text-5xl font-bold text-[#113854] mb-2">2000+</div>
+              <p className="text-gray-600">Books in Collection</p>
             </div>
-            <div className="bg-[#EDE3D3] rounded-lg p-6 text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="text-4xl font-bold text-[#113854] mb-2">100+</div>
-              <p className="text-gray-700">Authors Featured</p>
+            <div className="bg-white rounded-xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-100 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="text-5xl font-bold text-[#113854] mb-2">100+</div>
+              <p className="text-gray-600">Authors Featured</p>
             </div>
-            <div className="bg-[#EDE3D3] rounded-lg p-6 text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="text-4xl font-bold text-[#113854] mb-2">500+</div>
-              <p className="text-gray-700">Happy Readers</p>
+            <div className="bg-white rounded-xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-100 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="text-5xl font-bold text-[#113854] mb-2">500+</div>
+              <p className="text-gray-600">Happy Readers</p>
             </div>
-            <div className="bg-[#EDE3D3] rounded-lg p-6 text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-              <div className="text-4xl font-bold text-[#113854] mb-2">95%</div>
-              <p className="text-gray-700">Customer Satisfaction</p>
+            <div className="bg-white rounded-xl p-8 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl border border-gray-100 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-2 h-full bg-purple-500"></div>
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
+                  <StarIcon className="h-8 w-8 text-purple-500 fill-purple-500" />
+                </div>
+              </div>
+              <div className="text-5xl font-bold text-[#113854] mb-2">95%</div>
+              <p className="text-gray-600">Customer Satisfaction</p>
             </div>
           </div>
         </div>
@@ -708,126 +827,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Blog Preview Section */}
-      <div className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 border-b-4 border-[#B4846C] pb-2 inline-block">
-              From Our Blog
-            </h2>
-            <Link to="/blog" className="flex items-center text-[#B4846C] hover:text-[#967259] transition-colors duration-200">
-              View All Posts
-              <ArrowRightIcon className="h-5 w-5 ml-2" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-[#F5F0E8] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="relative">
-                <img src={book1} alt="Blog Post" className="w-full h-48 object-cover" />
-                <div className="absolute top-4 left-4 bg-[#B4846C] text-white text-xs px-3 py-1 rounded-full">
-                  Author Spotlight
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 hover:text-[#B4846C] transition-colors duration-200">
-                  An Afternoon with Arundhati Roy
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Our exclusive interview with the Booker Prize winner about her creative process and upcoming works.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500">March 15, 2025</span>
-                  <Link to="/blog/1" className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200">
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#F5F0E8] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="relative">
-                <img src={book2} alt="Blog Post" className="w-full h-48 object-cover" />
-                <div className="absolute top-4 left-4 bg-[#2D3142] text-white text-xs px-3 py-1 rounded-full">
-                  Reading Tips
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 hover:text-[#B4846C] transition-colors duration-200">
-                  10 Ways to Create the Perfect Reading Nook
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Transform any corner of your home into a cozy sanctuary for your reading sessions.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500">March 10, 2025</span>
-                  <Link to="/blog/2" className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200">
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="bg-[#F5F0E8] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="relative">
-                <img src={bm1} alt="Blog Post" className="w-full h-48 object-cover" />
-                <div className="absolute top-4 left-4 bg-emerald-600 text-white text-xs px-3 py-1 rounded-full">
-                  Book Reviews
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 hover:text-[#B4846C] transition-colors duration-200">
-                  March's Most Anticipated New Releases
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Our editors have curated a list of the most exciting books hitting shelves this month.
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs text-gray-500">March 5, 2025</span>
-                  <Link to="/blog/3" className="text-[#B4846C] text-sm font-medium hover:text-[#967259] transition-colors duration-200">
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Newsletter Section with Animation */}
-      <div className="py-20 bg-gradient-to-b from-white to-[#EDE3D3]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-[#B4846C] to-[#967259] rounded-2xl p-12 shadow-xl overflow-hidden relative">
-            <div className="absolute inset-0 opacity-10">
-              <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="white" strokeWidth="0.5"></path>
-                <path d="M0,0 L100,100 M100,0 L0,100" stroke="white" strokeWidth="0.5"></path>
-              </svg>
-            </div>
-            <div className="max-w-2xl mx-auto text-center relative z-10">
-              <span className="inline-block bg-white/20 text-white px-4 py-1 rounded-full text-sm mb-6 backdrop-blur-sm">Gift Cards Available</span>
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Give the Gift of Reading
-              </h2>
-              <p className="text-gray-100 mb-8">
-                BookNook gift cards are perfect for any occasion. Let your loved ones choose their next literary adventure.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  to="/gift-cards"
-                  className="bg-white text-[#B4846C] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-                >
-                  Purchase Gift Card
-                </Link>
-                <Link
-                  to="/redeem"
-                  className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-                >
-                  Redeem Gift Card
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Reviews Section */}
       <section className="py-16 bg-[#f8f5f1]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -879,31 +878,6 @@ const Home = () => {
                 <p className="text-[#B4846C] font-medium">- {quote.author}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-24 bg-[#113854] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Join Our Reading Community</h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Subscribe to our newsletter for book recommendations, exclusive offers, and literary insights.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#B4846C]"
-              />
-              <button
-                type="submit"
-                className="bg-[#B4846C] px-8 py-4 rounded-lg hover:bg-[#A3735B] transition-colors font-medium"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
       </section>
