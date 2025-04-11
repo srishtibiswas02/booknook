@@ -46,13 +46,16 @@ const Wishlist = () => {
             <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden">
               <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75">
                 <img
-                  src={item.image}
-                  alt={item.title}
+                  src={item.image || item.product?.image || 'https://via.placeholder.com/300x400?text=No+Image'}
+                  alt={item.title || item.product?.title || 'Book'}
                   className="w-full h-full object-center object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x400?text=No+Image';
+                  }}
                 />
                 <div className="absolute top-3 right-3">
                   <button
-                    onClick={() => handleRemoveFromWishlist(item.id)}
+                    onClick={() => handleRemoveFromWishlist(item.id || item.product?.id)}
                     className="p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200"
                   >
                     <TrashIcon className="h-5 w-5 text-red-500" />
@@ -62,14 +65,14 @@ const Wishlist = () => {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                    <Link to={`/product/${item.id}`}>
+                    <Link to={`/product/${item.id || item.product?.id}`}>
                       <span aria-hidden="true" className="absolute inset-0" />
-                      {item.title}
+                      {item.title || item.product?.title}
                     </Link>
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">{item.author}</p>
+                  <p className="mt-1 text-sm text-gray-500">{item.author || item.product?.author}</p>
                 </div>
-                <p className="text-sm font-medium text-[#B4846C]">{item.price}</p>
+                <p className="text-sm font-medium text-[#B4846C]">₹{item.price || item.product?.price}</p>
               </div>
               <div className="mt-4">
                 <button

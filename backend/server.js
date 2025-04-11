@@ -1,12 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const bookRoutes = require('./routes/bookRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const meetingsRouter = require('./routes/meetings');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 
@@ -15,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://srishtibiswas:srishti02@cluster.a9vvh.mongodb.net/bookstore?retryWrites=true&w=majority&appName=Cluster', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -29,6 +34,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/meetings', meetingsRouter);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

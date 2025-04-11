@@ -1,302 +1,277 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import RazorpayMock from '../components/RazorpayMock';
 
 const Checkout = () => {
-  const { items, total } = useSelector((state) => state.cart);
-  const [deliveryMethod, setDeliveryMethod] = useState('standard');
+  // For testing, log the cart structure
+  const cart = useSelector((state) => state.cart);
+  console.log("Cart in checkout:", cart);
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    pincode: '',
+    paymentMethod: 'razorpay'
+  });
   
-  // GST calculation (18% is standard GST rate in India for most goods)
-  const gstRate = 0.18;
-  const gstAmount = total * gstRate;
-  const grandTotal = total + gstAmount;
-  
-  // Delivery costs
-  const deliveryCosts = {
-    standard: 40,
-    express: 100,
-    premium: 200
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const states = [
+    'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+    'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
+    'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
+    'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
+    'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
+    'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+  ];
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
-  
-  const finalTotal = grandTotal + deliveryCosts[deliveryMethod];
+
+  const calculateTotal = () => {
+    if (!cart?.items || cart.items.length === 0) return 0;
+    
+    const subtotal = cart.items.reduce((total, item) => {
+      const product = item.product || item;
+      const price = parseFloat(product.price) || 0;
+      const quantity = parseInt(item.quantity) || 1;
+      return total + (price * quantity);
+    }, 0);
+
+    const gst = subtotal * 0.18; // 18% GST
+    const delivery = 50; // Fixed delivery charge
+    return subtotal + gst + delivery;
+  };
+
+  const handlePaymentSuccess = (response) => {
+    toast.success('Payment successful! Your order has been placed.');
+    dispatch({ type: 'cart/clearCart' });
+    navigate('/order-success');
+  };
+
+  const handlePaymentError = (error) => {
+    toast.error('Payment failed. Please try again.');
+    console.error('Payment error:', error);
+  };
+
+  if (!cart?.items || cart.items.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+          <button
+            onClick={() => navigate('/shop')}
+            className="bg-[#B4846C] text-white px-6 py-2 rounded-lg hover:bg-[#967259]"
+          >
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const total = calculateTotal();
+  console.log("Calculated total:", total);
+  // Convert to paise for Razorpay (multiply by 100)
+  const amountInPaise = Math.round(total * 100);
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-gray-50">
-      <h1 className="text-5xl font-bold text-[#B4846C] mb-4 font-serif">
-            Checkout
-          </h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Shipping Information */}
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">Shipping Information</h2>
+          <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
           <form className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                required
-                placeholder="+91"
-              />
-            </div>
-            <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                Address
-              </label>
-              <textarea
-                id="address"
-                name="address"
-                rows="3"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                required
-              ></textarea>
-            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                  City
-                </label>
+                <label className="block text-sm font-medium text-gray-700">First Name</label>
                 <input
                   type="text"
-                  id="city"
-                  name="city"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                  State
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Address</label>
+              <textarea
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">City</label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">State</label>
                 <select
-                  id="state"
                   name="state"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  value={formData.state}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
                   required
                 >
                   <option value="">Select State</option>
-                  <option value="AP">Andhra Pradesh</option>
-                  <option value="AR">Arunachal Pradesh</option>
-                  <option value="AS">Assam</option>
-                  <option value="BR">Bihar</option>
-                  <option value="CG">Chhattisgarh</option>
-                  <option value="GA">Goa</option>
-                  <option value="GJ">Gujarat</option>
-                  <option value="HR">Haryana</option>
-                  <option value="HP">Himachal Pradesh</option>
-                  <option value="JH">Jharkhand</option>
-                  <option value="KA">Karnataka</option>
-                  <option value="KL">Kerala</option>
-                  <option value="MP">Madhya Pradesh</option>
-                  <option value="MH">Maharashtra</option>
-                  <option value="MN">Manipur</option>
-                  <option value="ML">Meghalaya</option>
-                  <option value="MZ">Mizoram</option>
-                  <option value="NL">Nagaland</option>
-                  <option value="OR">Odisha</option>
-                  <option value="PB">Punjab</option>
-                  <option value="RJ">Rajasthan</option>
-                  <option value="SK">Sikkim</option>
-                  <option value="TN">Tamil Nadu</option>
-                  <option value="TG">Telangana</option>
-                  <option value="TR">Tripura</option>
-                  <option value="UP">Uttar Pradesh</option>
-                  <option value="UK">Uttarakhand</option>
-                  <option value="WB">West Bengal</option>
+                  {states.map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
-                  Postal Code
-                </label>
-                <input
-                  type="text"
-                  id="postalCode"
-                  name="postalCode"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                  maxLength="6"
-                />
-              </div>
-              <div>
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                  Country
-                </label>
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                  defaultValue="India"
-                  readOnly
-                />
-              </div>
-            </div>
-            
-            <div className="mt-6">
-              <h3 className="text-lg font-medium mb-3 border-b pb-2">Delivery Options</h3>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <input
-                    id="standard"
-                    name="deliveryMethod"
-                    type="radio"
-                    checked={deliveryMethod === 'standard'}
-                    onChange={() => setDeliveryMethod('standard')}
-                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                  />
-                  <label htmlFor="standard" className="ml-3 block text-sm font-medium text-gray-700">
-                    Standard Delivery (3-5 business days) - ₹40
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="express"
-                    name="deliveryMethod"
-                    type="radio"
-                    checked={deliveryMethod === 'express'}
-                    onChange={() => setDeliveryMethod('express')}
-                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                  />
-                  <label htmlFor="express" className="ml-3 block text-sm font-medium text-gray-700">
-                    Express Delivery (1-2 business days) - ₹100
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="premium"
-                    name="deliveryMethod"
-                    type="radio"
-                    checked={deliveryMethod === 'premium'}
-                    onChange={() => setDeliveryMethod('premium')}
-                    className="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                  />
-                  <label htmlFor="premium" className="ml-3 block text-sm font-medium text-gray-700">
-                    Premium Delivery (Same day for select locations) - ₹200
-                  </label>
-                </div>
-              </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Pincode</label>
+              <input
+                type="text"
+                name="pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#B4846C] focus:ring-[#B4846C]"
+                required
+              />
             </div>
           </form>
         </div>
-        
-        <div>
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-            <h2 className="text-xl font-semibold mb-4 border-b pb-2">Order Summary</h2>
-            {items.length === 0 ? (
-              <p className="text-gray-500 italic">Your cart is empty</p>
-            ) : (
-              <>
-                <div className="max-h-64 overflow-y-auto mb-4">
-                  {items.map((item) => (
-                    <div key={item.product._id} className="flex justify-between py-2 border-b">
-                      <div className="flex-1">
-                        <p className="font-medium">{item.product.name}</p>
-                        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
-                      </div>
-                      <span className="font-medium">₹{(item.product.price * item.quantity).toLocaleString()}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
-                    <span>₹{total.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">GST (18%)</span>
-                    <span>₹{gstAmount.toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Delivery</span>
-                    <span>₹{deliveryCosts[deliveryMethod]}</span>
-                  </div>
-                </div>
-                
-                <div className="border-t mt-4 pt-4">
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Total (Inc. GST)</span>
-                    <span>₹{finalTotal.toLocaleString()}</span>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    *Invoice will include GSTIN details
-                  </p>
-                </div>
-                
-                <div className="mt-6 space-y-4">
-                  <h3 className="font-medium">Payment Method</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="border rounded p-2 text-center cursor-pointer hover:bg-gray-50">
-                      <span className="block font-medium">UPI</span>
-                    </div>
-                    <div className="border rounded p-2 text-center cursor-pointer hover:bg-gray-50">
-                      <span className="block font-medium">Cards</span>
-                    </div>
-                    <div className="border rounded p-2 text-center cursor-pointer hover:bg-gray-50">
-                      <span className="block font-medium">Net Banking</span>
-                    </div>
-                    <div className="border rounded p-2 text-center cursor-pointer hover:bg-gray-50">
-                      <span className="block font-medium">COD</span>
-                    </div>
+
+        {/* Order Summary */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+          
+          <div className="space-y-4">
+            {cart.items.map((item, index) => {
+              const product = item.product || item;
+              let imageUrl = 'https://via.placeholder.com/300x400?text=No+Image';
+              
+              // Try to get the image URL from different places
+              if (product.image) {
+                imageUrl = product.image;
+              } else if (product.images && product.images.length > 0) {
+                imageUrl = product.images[0];
+              }
+              
+              return (
+                <div key={index} className="flex items-center space-x-4">
+                  <img
+                    src={imageUrl}
+                    alt={product.title || 'Product Image'}
+                    className="w-20 h-20 object-cover rounded"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/300x400?text=No+Image';
+                    }}
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-medium">{product.title}</h3>
+                    <p className="text-gray-600">Quantity: {item.quantity}</p>
+                    <p className="text-[#B4846C] font-medium">₹{parseFloat(product.price).toFixed(2)}</p>
                   </div>
                 </div>
-                
-                <button
-                  type="submit"
-                  className="w-full bg-indigo-600 mt-6 py-3 rounded-md text-white font-medium hover:bg-indigo-700 transition duration-200"
-                >
-                  Confirm Order
-                </button>
-                
-                <p className="text-xs text-gray-500 mt-4 text-center">
-                  By placing this order, you agree to our Terms of Service and Privacy Policy
-                </p>
-              </>
-            )}
+              );
+            })}
+          </div>
+
+          <div className="mt-6 border-t pt-4">
+            <div className="flex justify-between mb-2">
+              <span>Subtotal</span>
+              <span>₹{cart.items.reduce((total, item) => {
+                const product = item.product || item;
+                const price = parseFloat(product.price) || 0;
+                const quantity = parseInt(item.quantity) || 1;
+                return total + (price * quantity);
+              }, 0).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mb-2">
+              <span>GST (18%)</span>
+              <span>₹{(cart.items.reduce((total, item) => {
+                const product = item.product || item;
+                const price = parseFloat(product.price) || 0;
+                const quantity = parseInt(item.quantity) || 1;
+                return total + (price * quantity);
+              }, 0) * 0.18).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mb-2">
+              <span>Delivery</span>
+              <span>₹50.00</span>
+            </div>
+            <div className="flex justify-between font-bold text-lg mt-4">
+              <span>Total</span>
+              <span>₹{total.toFixed(2)}</span>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <RazorpayMock
+              amount={amountInPaise}
+              onSuccess={handlePaymentSuccess}
+              onError={handlePaymentError}
+            />
           </div>
         </div>
       </div>

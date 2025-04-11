@@ -757,7 +757,6 @@ const ProductDetail = () => {
               }
             ]
           },
-          
           12: {
             id: 12,
             title: 'The Silent Patient (Audiobook)',
@@ -818,7 +817,6 @@ const ProductDetail = () => {
               }
             ]
           },
-          
           13: {
             id: 13,
             title: 'Sapiens (Audiobook)',
@@ -879,7 +877,6 @@ const ProductDetail = () => {
               }
             ]
           },
-          
           14: {
             id: 14,
             title: 'Psychology of Money (Audiobook)',
@@ -940,7 +937,6 @@ const ProductDetail = () => {
               }
             ]
           },
-          
           15: {
             id: 15,
             title: 'Premium Bookmark Set',
@@ -1048,18 +1044,142 @@ const ProductDetail = () => {
             },
             reviews: [
               {
-                user: 'BookCollector',
+                user: 'ErgonomicReader',
                 rating: 5,
-                title: 'Beautiful and functional',
-                comment: 'These bookmarks are not only gorgeous but also sturdy enough to last through many books. The tassels add a lovely touch.',
-                date: '2024-01-18'
+                title: 'Perfect for comfortable reading',
+                comment: 'This stand has saved my neck! It\'s sturdy, adjustable, and looks beautiful on my desk. The page holders are a great feature for keeping cookbooks open.',
+                date: '2024-01-10'
               },
               {
-                user: 'GiftGiver',
+                user: 'MinimalistBookworm',
                 rating: 4,
-                title: 'Perfect gift for readers',
-                comment: 'I bought these as a gift for my book-loving friend and she absolutely loved them. The presentation box makes them extra special.',
-                date: '2023-12-25'
+                title: 'Great design, folds easily',
+                comment: 'I love how this stand folds completely flat for storage. The bamboo material is eco-friendly and feels premium. Only wish it came in different wood finishes.',
+                date: '2023-11-05'
+              }
+            ]
+          },
+          
+          17: {
+            id: 17,
+            title: 'Book Light',
+            author: 'LiteBright',
+            price: 349,
+            originalPrice: 449,
+            discount: 22,
+            description: 'Rechargeable LED book light with 3 color temperatures and 6 brightness levels. Perfect for reading at night without disturbing others. The flexible neck allows you to direct light exactly where you need it.',
+            plot: null,
+            aboutAuthor: 'LiteBright is a tech company specializing in reading lights and illumination solutions for book lovers. Founded in 2015, they combine cutting-edge LED technology with reader-friendly design to create products that enhance the reading experience in all lighting conditions. Their mission is to help people read comfortably anywhere, anytime.',
+            images: [
+              bl,
+              bl2,
+              bl3
+            ],
+            rating: 4.6,
+            numReviews: 112,
+            inStock: true,
+            stockCount: 35,
+            isbn: null,
+            publisher: null,
+            publishDate: null,
+            language: 'N/A',
+            dimensions: '4.7 x 1.6 x 0.8 inches',
+            genre: null,
+            awards: null,
+            features: [
+              '3 color temperatures: warm white, natural, and cool white',
+              '6 brightness levels for each color temperature',
+              'Rechargeable battery lasts up to 80 hours on lowest setting',
+              'Lightweight and compact design',
+              'Soft clip won\'t damage book pages',
+              'USB-C charging port'
+            ],
+            shipping: {
+              freeShipping: true,
+              estimatedDelivery: '2-4 business days',
+              expressAvailable: true
+            },
+            returns: {
+              returnable: true,
+              period: '30 days',
+              condition: 'Unused and in original packaging'
+            },
+            reviews: [
+              {
+                user: 'NightReader',
+                rating: 5,
+                title: 'Perfect for night reading',
+                comment: 'This light has transformed my nighttime reading routine. The warm white option is gentle on the eyes, and the battery lasts forever. My partner sleeps undisturbed while I read for hours!',
+                date: '2024-02-15'
+              },
+              {
+                user: 'TravelBookworm',
+                rating: 4,
+                title: 'Great for travel',
+                comment: 'I take this on all my trips. It\'s lightweight, holds a charge for my entire vacation, and the clip is strong enough to attach to various surfaces. Only wish it came with a travel case.',
+                date: '2023-12-18'
+              }
+            ]
+          },
+          
+          18: {
+            id: 18,
+            title: 'Book Cover (Medium)',
+            author: 'CoverCraft',
+            price: 199,
+            originalPrice: 249,
+            discount: 20,
+            description: 'Protective and stylish book cover for medium-sized books (up to 8.5 x 5.5 inches). Made from durable, water-resistant material to protect your books from spills, dirt, and wear.',
+            plot: null,
+            aboutAuthor: 'CoverCraft is a family-owned business that has been creating high-quality book covers and protection accessories since 1998. Their products are handcrafted with attention to detail, using materials selected for both durability and aesthetic appeal. CoverCraft is committed to helping readers protect their books while adding a touch of personal style.',
+            images: [
+              bc,
+              bc2,
+              bc3
+            ],
+            rating: 4.2,
+            numReviews: 54,
+            inStock: true,
+            stockCount: 45,
+            isbn: null,
+            publisher: null,
+            publishDate: null,
+            language: 'N/A',
+            dimensions: 'Fits books up to 8.5 x 5.5 inches',
+            genre: null,
+            awards: null,
+            features: [
+              'Water-resistant exterior',
+              'Soft microfiber interior to prevent scratches',
+              'Reinforced corners for extra protection',
+              'Elastic strap closure',
+              'Inner pocket for notes or bookmarks',
+              'Available in 5 different designs (this listing is for the classic pattern)'
+            ],
+            shipping: {
+              freeShipping: true,
+              estimatedDelivery: '2-4 business days',
+              expressAvailable: true
+            },
+            returns: {
+              returnable: true,
+              period: '30 days',
+              condition: 'Unused and in original packaging'
+            },
+            reviews: [
+              {
+                user: 'BookPreserver',
+                rating: 5,
+                title: 'Perfect protection for paperbacks',
+                comment: 'These covers have extended the life of my paperback collection significantly. The material is durable, and I love the classic design. Will be buying more in different sizes.',
+                date: '2023-11-20'
+              },
+              {
+                user: 'CommutingReader',
+                rating: 4,
+                title: 'Great for travel reading',
+                comment: 'I use these covers for books I take on my commute. They protect against coffee spills and getting squished in my bag. Docked one star because sometimes the elastic gets a bit loose after extended use.',
+                date: '2024-01-05'
               }
             ]
           }
@@ -1068,15 +1188,13 @@ const ProductDetail = () => {
         const productData = mockProducts[id];
         if (productData) {
           setProduct(productData);
-          setError(null);
-          
-          // Check if the product is in the wishlist
-          const isInWishlist = wishlist.some(item => item.id === parseInt(id));
-          setIsWishlisted(isInWishlist);
+          // Check if product is in wishlist
+          setIsWishlisted(wishlist.some(item => item.id === productData.id));
         } else {
           setError('Product not found');
         }
       } catch (err) {
+        console.error('Error fetching product:', err);
         setError('Failed to load product data');
       } finally {
         setLoading(false);
@@ -1192,6 +1310,38 @@ const ProductDetail = () => {
         price: 349,
         image: divine,
         rating: 4.6
+      },
+      15: {
+        id: 1,
+        title: 'A Good Girl\'s Guide to Murder',
+        author: 'Holly Jackson',
+        price: 299,
+        image: goodgirl,
+        rating: 4.5
+      },
+      16: {
+        id: 17,
+        title: 'Pride and Prejudice',
+        author: 'Jane Austen',
+        price: 299,
+        image: atomic,
+        rating: 4.7
+      },
+      17: {
+        id: 18,
+        title: 'To Kill a Mockingbird',
+        author: 'Harper Lee',
+        price: 349,
+        image: divine,
+        rating: 4.8
+      },
+      18: {
+        id: 15,
+        title: 'The Complete Harry Potter Collection',
+        author: 'J.K. Rowling',
+        price: 2499,
+        image: ikigai,
+        rating: 4.9
       }
     };
     
@@ -1271,7 +1421,7 @@ const ProductDetail = () => {
               <div className="flex items-center">
                 <span className="mx-2 text-gray-400">/</span>
                 <span className="text-sm font-medium text-gray-500 truncate max-w-xs">
-                  {product.title}
+                  {product?.title || 'Product Details'}
                 </span>
               </div>
             </li>
@@ -1286,29 +1436,37 @@ const ProductDetail = () => {
             <div className="space-y-6">
               <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                 <img
-                  src={product.images[selectedImage]}
-                  alt={product.title}
+                  src={product?.images && product.images.length > 0 && selectedImage < product.images.length
+                    ? product.images[selectedImage]
+                    : book1}
+                  alt={product?.title || 'Product Image'}
                   className="w-full h-full object-contain"
                 />
               </div>
               <div className="grid grid-cols-3 gap-4">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 border transition-all duration-200 ${
-                      selectedImage === index 
-                        ? 'ring-2 ring-[#B4846C] border-[#B4846C]' 
-                        : 'border-gray-200 hover:border-[#B4846C]/50'
-                    }`}
-                  >
-                    <img
-                      src={image}
-                      alt={`${product.title} ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
+                {product?.images && product.images.length > 0 ? (
+                  product.images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`aspect-w-1 aspect-h-1 rounded-lg overflow-hidden bg-gray-100 border transition-all duration-200 ${
+                        selectedImage === index 
+                          ? 'ring-2 ring-[#B4846C] border-[#B4846C]' 
+                          : 'border-gray-200 hover:border-[#B4846C]/50'
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`${product?.title || 'Product'} ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))
+                ) : (
+                  <div className="col-span-3 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <p className="text-gray-500">No images available</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -1316,7 +1474,7 @@ const ProductDetail = () => {
             <div className="space-y-6">
               <div>
                 <div className="flex items-center mb-1">
-                  {product.inStock ? (
+                  {product?.inStock ? (
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                       In Stock
                     </span>
@@ -1325,16 +1483,16 @@ const ProductDetail = () => {
                       Out of Stock
                     </span>
                   )}
-                  {product.discount > 0 && (
+                  {product?.discount > 0 && (
                     <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                       {product.discount}% OFF
                     </span>
                   )}
                 </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{product?.title || 'Product Title'}</h1>
                 <p className="text-xl text-gray-600 flex items-center">
                   <UserIcon className="h-5 w-5 mr-1 text-gray-400" />
-                  by <span className="ml-1 font-medium text-[#B4846C] hover:underline cursor-pointer">{product.author}</span>
+                  by <span className="ml-1 font-medium text-[#B4846C] hover:underline cursor-pointer">{product?.author || 'Unknown Author'}</span>
                 </p>
               </div>
 
@@ -1342,9 +1500,9 @@ const ProductDetail = () => {
               <div className="flex items-center space-x-1">
                   {[...Array(5)].map((_, i) => (
                     <span key={i}>
-                      {i < Math.floor(product.rating) ? (
+                      {product?.rating && i < Math.floor(product.rating) ? (
                         <StarSolidIcon className="h-5 w-5 text-yellow-400" />
-                      ) : i < product.rating ? (
+                      ) : product?.rating && i < product.rating ? (
                         <StarIcon className="h-5 w-5 text-yellow-400" />
                       ) : (
                         <StarIcon className="h-5 w-5 text-gray-300" />
@@ -1352,7 +1510,7 @@ const ProductDetail = () => {
                     </span>
                   ))}
                   <span className="ml-2 text-sm text-gray-500">
-                    ({product.numReviews} reviews)
+                    ({product?.numReviews || 0} reviews)
                   </span>
                 </div>
               </div>
@@ -1360,12 +1518,12 @@ const ProductDetail = () => {
               <div className="border-t border-b py-4 space-y-3">
                 <div className="flex items-center">
                   <span className="text-3xl font-bold text-gray-900">
-                    ₹{(product.price).toFixed(2)}
+                    ₹{product?.price ? (product.price).toFixed(2) : '0.00'}
                   </span>
-                  {product.discount > 0 && (
+                  {product?.discount > 0 && product?.originalPrice && (
                     <>
                       <span className="ml-3 text-lg text-gray-500 line-through">
-                      ₹{(product.originalPrice ).toFixed(2)}
+                      ₹{(product.originalPrice).toFixed(2)}
                       </span>
                       <span className="ml-2 text-red-600 font-medium">
                         Save ₹{((product.originalPrice - product.price)).toFixed(2)}
@@ -1376,10 +1534,10 @@ const ProductDetail = () => {
 
                 <div className="flex items-center text-sm text-gray-500">
                   <TruckIcon className="h-5 w-5 text-green-500 mr-1" />
-                  {product.shipping.freeShipping 
+                  {product?.shipping?.freeShipping 
                     ? "Free shipping" 
                     : "Standard shipping rates apply"}
-                  {product.shipping.expressAvailable && (
+                  {product?.shipping?.expressAvailable && (
                     <span className="ml-1">
                       (Express delivery available)
                     </span>
@@ -1401,15 +1559,15 @@ const ProductDetail = () => {
                     <span className="px-4 py-2 text-center min-w-[3rem]">{quantity}</span>
                     <button
                       type="button"
-                      disabled={quantity >= product.stockCount}
-                      onClick={() => setQuantity(Math.min(product.stockCount, quantity + 1))}
+                      disabled={!product?.stockCount || quantity >= product.stockCount}
+                      onClick={() => product?.stockCount && setQuantity(Math.min(product.stockCount, quantity + 1))}
                       className="px-3 py-2 border-l text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       +
                     </button>
                   </div>
                   <span className="text-sm text-gray-500">
-                    {product.stockCount} items available
+                    {product?.stockCount || 0} items available
                   </span>
                 </div>
 
@@ -1452,44 +1610,56 @@ const ProductDetail = () => {
                       <ChevronDownIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </button>
-                  {expandedSections.details && (
+                  {expandedSections.details && product && (
                     <div className="px-4 pb-4 text-sm text-gray-600 space-y-2">
                       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                        <div className="flex items-center">
-                          <BookOpenIcon className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="font-medium mr-1">Pages:</span> {product.pages}
-                        </div>
-                        <div className="flex items-center">
-                          <TagIcon className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="font-medium mr-1">ISBN:</span> {product.isbn}
-                        </div>
-                        <div className="flex items-center">
-                          <CalendarIcon className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="font-medium mr-1">Published:</span> {product.publishDate}
-                        </div>
-                        <div className="flex items-center">
-                          <LanguageIcon className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="font-medium mr-1">Language:</span> {product.language}
-                        </div>
-                        <div className="flex items-center">
-                          <PencilSquareIcon className="h-4 w-4 text-gray-400 mr-2" />
-                          <span className="font-medium mr-1">Publisher:</span> {product.publisher}
-                        </div>
+                        {product.pages && (
+                          <div className="flex items-center">
+                            <BookOpenIcon className="h-4 w-4 text-gray-400 mr-2" />
+                            <span className="font-medium mr-1">Pages:</span> {product.pages}
+                          </div>
+                        )}
+                        {product.isbn && (
+                          <div className="flex items-center">
+                            <TagIcon className="h-4 w-4 text-gray-400 mr-2" />
+                            <span className="font-medium mr-1">ISBN:</span> {product.isbn}
+                          </div>
+                        )}
+                        {product.publishDate && (
+                          <div className="flex items-center">
+                            <CalendarIcon className="h-4 w-4 text-gray-400 mr-2" />
+                            <span className="font-medium mr-1">Published:</span> {product.publishDate}
+                          </div>
+                        )}
+                        {product.language && (
+                          <div className="flex items-center">
+                            <LanguageIcon className="h-4 w-4 text-gray-400 mr-2" />
+                            <span className="font-medium mr-1">Language:</span> {product.language}
+                          </div>
+                        )}
+                        {product.publisher && (
+                          <div className="flex items-center">
+                            <PencilSquareIcon className="h-4 w-4 text-gray-400 mr-2" />
+                            <span className="font-medium mr-1">Publisher:</span> {product.publisher}
+                          </div>
+                        )}
                       </div>
-                      <div className="pt-2">
-                        <span className="font-medium">Genre: </span>
-                        <div className="flex flex-wrap gap-1 mt-1">
-                          {product.genre.map((genre, index) => (
-                            <span
-                              key={index}
-                              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#F6EEE0] text-[#B4846C]"
-                            >
-                              {genre}
-                            </span>
-                          ))}
+                      {product.genre && product.genre.length > 0 && (
+                        <div className="pt-2">
+                          <span className="font-medium">Genre: </span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {product.genre.map((genre, index) => (
+                              <span
+                                key={index}
+                                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#F6EEE0] text-[#B4846C]"
+                              >
+                                {genre}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      {product.awards.length > 0 && (
+                      )}
+                      {product.awards && product.awards.length > 0 && (
                         <div className="pt-2">
                           <span className="font-medium">Awards: </span>
                           <ul className="list-disc list-inside mt-1 ml-1 space-y-1">
@@ -1515,7 +1685,7 @@ const ProductDetail = () => {
                       <ChevronDownIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </button>
-                  {expandedSections.shipping && (
+                  {expandedSections.shipping && product?.shipping && (
                     <div className="px-4 pb-4 text-sm text-gray-600 space-y-3">
                       <p className="flex items-center">
                         <TruckIcon className="h-5 w-5 text-gray-400 mr-2" />
@@ -1549,7 +1719,7 @@ const ProductDetail = () => {
                       <ChevronDownIcon className="h-5 w-5 text-gray-500" />
                     )}
                   </button>
-                  {expandedSections.returns && (
+                  {expandedSections.returns && product?.returns && (
                     <div className="px-4 pb-4 text-sm text-gray-600 space-y-2">
                       {product.returns.returnable ? (
                         <>
@@ -1617,21 +1787,23 @@ const ProductDetail = () => {
             </div>
             
             <div className="py-6">
-              {activeTab === 'description' && (
+              {activeTab === 'description' && product && (
                 <div className="prose max-w-none">
                   <p className="text-gray-700 leading-relaxed">{product.description}</p>
-                  <div className="mt-4 pt-4 border-t">
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">Features</h3>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {product.features.map((feature, index) => (
-                        <li key={index} className="text-gray-600">{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  {product.features && product.features.length > 0 && (
+                    <div className="mt-4 pt-4 border-t">
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">Features</h3>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {product.features.map((feature, index) => (
+                          <li key={index} className="text-gray-600">{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
               
-              {activeTab === 'plot' && (
+              {activeTab === 'plot' && product?.plot && (
                 <div className="prose max-w-none">
                   <div className="flex items-center mb-4">
                     <InformationCircleIcon className="h-5 w-5 text-yellow-500 mr-2" />
@@ -1643,14 +1815,14 @@ const ProductDetail = () => {
                 </div>
               )}
               
-              {activeTab === 'author' && (
+              {activeTab === 'author' && product?.aboutAuthor && (
                 <div className="prose max-w-none">
                   <h3 className="text-lg font-medium text-gray-900 mb-2">About {product.author}</h3>
                   <p className="text-gray-700 leading-relaxed">{product.aboutAuthor}</p>
                 </div>
               )}
               
-              {activeTab === 'reviews' && (
+              {activeTab === 'reviews' && product?.reviews && (
                 <div className="space-y-6">
                   <div className="flex items-center">
                     <div className="flex items-center">
@@ -1658,7 +1830,7 @@ const ProductDetail = () => {
                         <StarSolidIcon
                           key={i}
                           className={`h-5 w-5 ${
-                            i < Math.round(product.rating)
+                            i < Math.round(product.rating || 0)
                               ? 'text-yellow-400'
                               : 'text-gray-300'
                           }`}
@@ -1666,7 +1838,7 @@ const ProductDetail = () => {
                       ))}
                     </div>
                     <p className="ml-2 text-sm text-gray-700">
-                      Based on {product.numReviews} reviews
+                      Based on {product.numReviews || 0} reviews
                     </p>
                   </div>
                   
@@ -1679,7 +1851,7 @@ const ProductDetail = () => {
                               <StarSolidIcon
                                 key={i}
                                 className={`h-4 w-4 ${
-                                  i < review.rating ? 'text-yellow-400' : 'text-gray-300'
+                                  review.rating && i < review.rating ? 'text-yellow-400' : 'text-gray-300'
                                 }`}
                               />
                             ))}
@@ -1715,22 +1887,22 @@ const ProductDetail = () => {
               >
                 <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden bg-gray-100 mb-4">
                   <img
-                    src={relatedProduct.image}
-                    alt={relatedProduct.title}
+                    src={relatedProduct.image || book1}
+                    alt={relatedProduct.title || 'Related Product'}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <h3 className="text-base font-medium text-gray-900 group-hover:text-[#B4846C] transition-colors duration-200 line-clamp-2">
-                  {relatedProduct.title}
+                  {relatedProduct.title || 'Product Title'}
                 </h3>
-                <p className="text-sm text-gray-500">{relatedProduct.author}</p>
+                <p className="text-sm text-gray-500">{relatedProduct.author || 'Author'}</p>
                 <div className="flex items-center mt-1">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
                       <StarSolidIcon
                         key={i}
                         className={`h-4 w-4 ${
-                          i < Math.floor(relatedProduct.rating)
+                          relatedProduct.rating && i < Math.floor(relatedProduct.rating)
                             ? 'text-yellow-400'
                             : 'text-gray-300'
                         }`}
@@ -1738,11 +1910,11 @@ const ProductDetail = () => {
                     ))}
                   </div>
                   <span className="ml-1 text-xs text-gray-500">
-                    ({relatedProduct.rating})
+                    ({relatedProduct.rating || 0})
                   </span>
                 </div>
                 <p className="mt-2 font-medium text-gray-900">
-                  ₹{(relatedProduct.price).toFixed(2)}
+                  ₹{relatedProduct.price ? (relatedProduct.price).toFixed(2) : '0.00'}
                 </p>
               </Link>
             ))}

@@ -51,7 +51,7 @@ const categories = [
   {
     name: 'Books',
     icon: BookOpenIcon,
-    link: '/category/books',
+    link: '/category/fiction',
     description: 'Discover our curated collection of physical books',
     image: book1,
     bgColor: 'from-amber-700 to-amber-900'
@@ -59,7 +59,7 @@ const categories = [
   {
     name: 'Novels',
     icon: BookmarkIcon,
-    link: '/category/novels',
+    link: '/category/fiction',
     description: 'Explore timeless classics and contemporary fiction',
     image: book2,
     bgColor: 'from-emerald-700 to-emerald-900'

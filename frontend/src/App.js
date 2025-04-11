@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -26,6 +28,7 @@ import Membership from './pages/Membership';
 import Profile from './pages/Profile';
 import Orders from './pages/Orders';
 import OrderConfirmation from './pages/OrderConfirmation';
+import OrderSuccess from './pages/OrderSuccess';
 import Author from './pages/Author';
 import BookReviews from './pages/BookReviews';
 import PrivateRoute from './components/PrivateRoute';
@@ -90,6 +93,14 @@ const App = () => {
               }
             />
             <Route
+              path="/order-success"
+              element={
+                <PrivateRoute>
+                  <OrderSuccess />
+                </PrivateRoute>
+              }
+            />
+            <Route
               path="/book-reviews"
               element={
                 <PrivateRoute>
@@ -107,6 +118,18 @@ const App = () => {
           </Routes>
         </main>
         <Footer />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </Router>
   );
