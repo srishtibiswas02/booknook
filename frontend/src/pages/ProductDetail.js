@@ -158,7 +158,7 @@ const ProductDetail = () => {
             title: 'Good Girl, Bad Blood',
             author: 'Holly Jackson',
             price: 299,
-            originalPrice: 399,
+            originalPrice: 369,
             discount: 25,
             description: 'The second book in the series where Pip has sworn off detective work after solving the Andie Bell case. But when a friend\'s brother goes missing and the police won\'t help, Pip is pulled back into the world of investigating. This time, she\'s documenting it all on her podcast, and everyone is listening.',
             plot: 'After the events of "A Good Girl\'s Guide to Murder," Pip is done with detective work. But when Jamie Reynolds disappears on the night of the town\'s commemoration for the victim of Pip\'s last case, she feels compelled to investigate. As Pip records her findings for her popular podcast, she uncovers more than she bargained for, putting herself in danger once again.',
